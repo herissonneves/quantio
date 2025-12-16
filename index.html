@@ -4,16 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantio</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sections-row {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-width: 400px;
+        }
+    </style>
 </head>
 <body>
     <main>
         <h1>Quantio</h1>
-        <section>
-            <p>Section 1</p>
-        </section>
-        <section>
-            <p>Section 2</p>
-        </section>
+        <div class="sections-row">
+            <section>
+                <p>Section 1</p>
+                <div class="button-grid">
+                    <button type="button">C</button>
+                    <button type="button">±</button>
+                    <button type="button">%</button>
+                    <button type="button">÷</button>
+                    <button type="button">7</button>
+                    <button type="button">8</button>
+                    <button type="button">9</button>
+                    <button type="button">×</button>
+                    <button type="button">4</button>
+                    <button type="button">5</button>
+                    <button type="button">6</button>
+                    <button type="button">-</button>
+                    <button type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button">+</button>
+                    <button type="button">0</button>
+                    <button type="button">0</button>
+                    <button type="button">.</button>
+                    <button type="button">=</button>
+                </div>
+            </section>
+            <section>
+                <p>Section 2</p>
+                <div></div>
+                <label for="category-select">Conversion category:</label>
+                <select id="category-select" name="category">
+                    <option value="length">Length</option>
+                    <option value="mass">Mass / Weight</option>
+                    <option value="temperature">Temperature</option>
+                    <option value="volume">Volume</option>
+                    <option value="time">Time</option>
+                </select>
+            </section>
+        </div>
     </main>
 </body>
 </html>
