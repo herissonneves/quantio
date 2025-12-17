@@ -64,28 +64,7 @@
         </section>
     </main>
 
-    <script>
-        // Material Design 3 Tabs Logic
-        const tabs = document.querySelectorAll('.tabs__item');
-        const panels = document.querySelectorAll('.tabs__panel');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetId = tab.dataset.tab;
-
-                // Update active tab
-                tabs.forEach(t => t.classList.remove('tabs__item--active'));
-                tab.classList.add('tabs__item--active');
-
-                // Update active panel
-                panels.forEach(panel => {
-                    panel.classList.remove('tabs__panel--active');
-                    if (panel.id === targetId) {
-                        panel.classList.add('tabs__panel--active');
-                    }
-                });
-            });
-        });
-    </script>
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
