@@ -23,14 +23,18 @@
 }
 
 .tabs__item {
-    flex: 1;
-    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 0 0;
+    align-self: stretch;
+    padding: 14px 2rem;
+    gap: 4px;
     border: none;
     background: transparent;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.1px;
+    font: var(--md-text-title-medium);
+    letter-spacing: var(--md-letter-spacing-title-medium);
     color: var(--md-sys-color-on-surface-variant);
     cursor: pointer;
     position: relative;
@@ -38,7 +42,7 @@
 }
 
 .tabs__item:hover {
-    background-color: var(--md-sys-color-primary-container);
+    background-color: rgba(29,27,32,0.08);
     color: var(--md-sys-color-primary);
 }
 

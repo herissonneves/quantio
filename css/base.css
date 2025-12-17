@@ -1,4 +1,100 @@
 /* Base Styles */
+:root {
+    --md-font-family: "Roboto", sans-serif;
+
+    /* Typography */
+
+    /* Text Display */
+    --md-text-display-large: 400 57px/64px var(--md-font-family);
+    --md-text-display-large-emphasized: 500 57px/64px var(--md-font-family);
+    --md-text-display-medium: 400 45px/52px var(--md-font-family);
+    --md-text-display-medium-emphasized: 500 45px/52px var(--md-font-family);
+    --md-text-display-small: 400 36px/44px var(--md-font-family);
+    --md-text-display-small-emphasized: 500 36px/44px var(--md-font-family);
+
+    /* Text Headline */
+    --md-text-headline-large: 400 32px/40px var(--md-font-family);
+    --md-text-headline-large-emphasized: 500 32px/40px var(--md-font-family);
+    --md-text-headline-medium: 400 28px/36px var(--md-font-family);
+    --md-text-headline-medium-emphasized: 500 28px/36px var(--md-font-family);
+    --md-text-headline-small: 400 24px/32px var(--md-font-family);
+    --md-text-headline-small-emphasized: 500 24px/32px var(--md-font-family);
+
+    /* Text Title */
+    --md-text-title-large: 400 22px/28px var(--md-font-family);
+    --md-text-title-large-emphasized: 500 22px/28px var(--md-font-family);
+    --md-text-title-medium: 500 16px/24px var(--md-font-family);
+    --md-text-title-medium-emphasized: 700 16px/24px var(--md-font-family);
+    --md-text-title-small: 500 14px/20px var(--md-font-family);
+    --md-text-title-small-emphasized: 700 14px/20px var(--md-font-family);
+
+    /* Text Label */
+    --md-text-label-large: 500 14px/20px var(--md-font-family);
+    --md-text-label-large-emphasized: 700 14px/20px var(--md-font-family);
+    --md-text-label-medium: 500 12px/16px var(--md-font-family);
+    --md-text-label-medium-emphasized: 700 12px/16px var(--md-font-family);
+    --md-text-label-small: 500 11px/16px var(--md-font-family);
+    --md-text-label-small-emphasized: 700 11px/16px var(--md-font-family);
+
+    /* Text Body */
+    --md-text-body-large: 400 16px/24px var(--md-font-family);
+    --md-text-body-large-emphasized: 500 16px/24px var(--md-font-family);
+    --md-text-body-medium: 400 14px/20px var(--md-font-family);
+    --md-text-body-medium-emphasized: 500 14px/20px var(--md-font-family);
+    --md-text-body-small: 400 12px/16px var(--md-font-family);
+    --md-text-body-small-emphasized: 500 12px/16px var(--md-font-family);
+
+    /* Letter spacing */
+    --md-text-display-large-letter-spacing: -.25px;
+    --md-text-display-medium-letter-spacing: 0;
+    --md-text-display-small-letter-spacing: 0;
+    --md-text-headline-large-letter-spacing: 0;
+    --md-text-headline-medium-letter-spacing: 0;
+    --md-text-headline-small-letter-spacing: 0;
+    --md-text-title-large-letter-spacing: 0;
+    --md-text-title-medium-letter-spacing: .15px;
+    --md-text-title-small-letter-spacing: .1px;
+    --md-text-label-large-letter-spacing: .1px;
+    --md-text-label-medium-letter-spacing: .5px;
+    --md-text-label-small-letter-spacing: .5px;
+    --md-text-body-large-letter-spacing: .5px;
+    --md-text-body-medium-letter-spacing: .25px;
+    --md-text-body-small-letter-spacing: .4px;
+
+    /* Material Design - Spacing - Increments of 4px */
+    --md-spacing: 4px;
+
+    --md-elevation-light-1-border-radius: 1rem;
+    --md-elevation-light-1-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.30), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+
+    --md-elevation-light-2-border-radius: 1rem;
+    --md-elevation-light-2-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.30), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+
+    --md-elevation-light-3-border-radius: 1rem;
+    --md-elevation-light-3-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px 0 rgba(0, 0, 0, 0.30);
+
+    --md-elevation-light-4-border-radius: 1rem;
+    --md-elevation-light-4-box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.30);
+
+    --md-elevation-light-5-border-radius: 1rem;
+    --md-elevation-light-5-box-shadow: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px 0 rgba(0, 0, 0, 0.30);
+
+    --md-elevation-dark-1-border-radius: 1rem;
+    --md-elevation-dark-1-box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.30);
+
+    --md-elevation-dark-2-border-radius: 1rem;
+    --md-elevation-dark-2-box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.30);
+
+    --md-elevation-dark-3-border-radius: 1rem;
+    --md-elevation-dark-3-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px 0 rgba(0, 0, 0, 0.30);
+
+    --md-elevation-dark-4-border-radius: 1rem;
+    --md-elevation-dark-4-box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.30);
+
+    --md-elevation-dark-5-border-radius: 1rem;
+    --md-elevation-dark-5-box-shadow: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
 * {
     box-sizing: border-box;
 }
