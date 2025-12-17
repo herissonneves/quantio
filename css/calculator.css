@@ -1,0 +1,33 @@
+/* ==========================================================================
+   CALCULATOR COMPONENT (BEM)
+   Block: .calculator
+   ========================================================================== */
+
+/* Block */
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+/* Elements */
+.calculator__button {
+    padding: 16px;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    border: none;
+    border-radius: 12px;
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.calculator__button:hover {
+    background: var(--md-sys-color-surface-container-highest);
+}
+
+.calculator__button:active {
+    transform: scale(0.96);
+}

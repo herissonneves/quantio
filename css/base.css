@@ -1,0 +1,30 @@
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: var(--md-sys-color-on-background);
+    font-weight: 500;
+    margin: 0 0 8px 0;
+}
+

@@ -4,75 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantio</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-        }
-
-        main {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .sections-row {
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-        }
-
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            max-width: 400px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Theme (default: light) -->
+    <link rel="stylesheet" href="css/themes/theme-light.css">
+    <!-- Base & Components -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/tabs.css">
+    <link rel="stylesheet" href="css/calculator.css">
+    <link rel="stylesheet" href="css/converter.css">
 </head>
 <body>
     <main>
         <h1>Quantio</h1>
-        <div class="sections-row">
-            <section>
-                <p>Section 1</p>
-                <div class="button-grid">
-                    <button type="button">C</button>
-                    <button type="button">±</button>
-                    <button type="button">%</button>
-                    <button type="button">÷</button>
-                    <button type="button">7</button>
-                    <button type="button">8</button>
-                    <button type="button">9</button>
-                    <button type="button">×</button>
-                    <button type="button">4</button>
-                    <button type="button">5</button>
-                    <button type="button">6</button>
-                    <button type="button">-</button>
-                    <button type="button">1</button>
-                    <button type="button">2</button>
-                    <button type="button">3</button>
-                    <button type="button">+</button>
-                    <button type="button">0</button>
-                    <button type="button">0</button>
-                    <button type="button">.</button>
-                    <button type="button">=</button>
+        <section class="tabs">
+            <div class="tabs__header">
+                <button class="tabs__item tabs__item--active" data-tab="calculator">Calculator</button>
+                <button class="tabs__item" data-tab="converter">Converter</button>
+            </div>
+            <div class="tabs__content">
+                <!-- Calculator Tab -->
+                <div class="tabs__panel tabs__panel--active" id="calculator">
+                    <div class="calculator">
+                        <button class="calculator__button" type="button">C</button>
+                        <button class="calculator__button" type="button">±</button>
+                        <button class="calculator__button" type="button">%</button>
+                        <button class="calculator__button" type="button">÷</button>
+                        <button class="calculator__button" type="button">7</button>
+                        <button class="calculator__button" type="button">8</button>
+                        <button class="calculator__button" type="button">9</button>
+                        <button class="calculator__button" type="button">×</button>
+                        <button class="calculator__button" type="button">4</button>
+                        <button class="calculator__button" type="button">5</button>
+                        <button class="calculator__button" type="button">6</button>
+                        <button class="calculator__button" type="button">-</button>
+                        <button class="calculator__button" type="button">1</button>
+                        <button class="calculator__button" type="button">2</button>
+                        <button class="calculator__button" type="button">3</button>
+                        <button class="calculator__button" type="button">+</button>
+                        <button class="calculator__button" type="button">0</button>
+                        <button class="calculator__button" type="button">0</button>
+                        <button class="calculator__button" type="button">.</button>
+                        <button class="calculator__button" type="button">=</button>
+                    </div>
                 </div>
-            </section>
-            <section>
-                <p>Section 2</p>
-                <div></div>
-                <label for="category-select">Conversion category:</label>
-                <select id="category-select" name="category">
-                    <option value="length">Length</option>
-                    <option value="mass">Mass / Weight</option>
-                    <option value="temperature">Temperature</option>
-                    <option value="volume">Volume</option>
-                    <option value="time">Time</option>
-                </select>
-            </section>
-        </div>
+                <!-- Converter Tab -->
+                <div class="tabs__panel" id="converter">
+                    <div class="converter">
+                        <label class="converter__label" for="category-select">Conversion category:</label>
+                        <select class="converter__select" id="category-select" name="category">
+                            <option value="length">Length</option>
+                            <option value="mass">Mass / Weight</option>
+                            <option value="temperature">Temperature</option>
+                            <option value="volume">Volume</option>
+                            <option value="time">Time</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <script>
+        // Material Design 3 Tabs Logic
+        const tabs = document.querySelectorAll('.tabs__item');
+        const panels = document.querySelectorAll('.tabs__panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetId = tab.dataset.tab;
+
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('tabs__item--active'));
+                tab.classList.add('tabs__item--active');
+
+                // Update active panel
+                panels.forEach(panel => {
+                    panel.classList.remove('tabs__panel--active');
+                    if (panel.id === targetId) {
+                        panel.classList.add('tabs__panel--active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
