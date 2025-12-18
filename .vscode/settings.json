@@ -11,15 +11,23 @@
   "[html]": {
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
-    "editor.wordWrap": "on",
-    "editor.wordWrapColumn": 100
+    "editor.detectIndentation": false,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80
   },
+  "html.completion.attributeDefaultValue": "doublequotes",
   "html.format.indentInnerHtml": true,
-  "html.format.wrapLineLength": 100,
+  "html.format.indentHandlebars": false,
+  "html.format.wrapLineLength": 80,
   "html.format.wrapAttributes": "force-aligned",
-  "html.format.endWithNewline": true,
+  "html.format.wrapAttributesIndentSize": 2,
   "html.format.preserveNewLines": true,
-  "html.format.maxPreserveNewLines": 2,
+  "html.format.maxPreserveNewLines": 1,
+  "html.format.templating": true,
+  "html.format.unformatted": "",
+  "html.format.contentUnformatted": "pre,code,textarea",
+  "html.format.extraLiners": "",
+  "html.autoClosingTags": true,
   "emmet.triggerExpansionOnTab": true,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
