@@ -4,12 +4,14 @@
  */
 
 import { initTabs } from './components/tabs.js';
+import { initCalculator } from './components/calculator.js';
 
 /**
  * Initialize the application
  */
 function init() {
     initTabs();
+    initCalculator();
 }
 
 // Initialize when DOM is ready
