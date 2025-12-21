@@ -5,11 +5,13 @@
 
 import { initTabs } from './components/tabs.js';
 import { initCalculator } from './components/calculator.js';
+import { initThemeToggle } from './components/theme-toggle.js';
 
 /**
  * Initialize the application
  */
 function init() {
+    initThemeToggle();
     initTabs();
     initCalculator();
 }
