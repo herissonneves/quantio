@@ -1,5 +1,4 @@
-:root,
-:root[data-theme='light'] {
+:root {
   --md-sys-color-primary: rgb(62 95 144);
   --md-sys-color-surface-tint: rgb(62 95 144);
   --md-sys-color-on-primary: rgb(255 255 255);

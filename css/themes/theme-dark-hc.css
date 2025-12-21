@@ -1,4 +1,4 @@
-:root[data-theme='dark-high-contrast'] {
+:root {
   --md-sys-color-primary: rgb(234 240 255);
   --md-sys-color-surface-tint: rgb(167 200 255);
   --md-sys-color-on-primary: rgb(0 0 0);
