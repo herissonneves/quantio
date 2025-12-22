@@ -1,26 +1,79 @@
 /**
- * Calculator Component
- * Handles calculator button clicks and display updates
+ * @fileoverview Calculator Component
+ * @description Handles calculator functionality including button clicks, keyboard input,
+ * arithmetic operations, and display management. Implements input validation to prevent
+ * display overflow and supports dynamic font scaling for long numbers.
+ *
+ * @module components/calculator
+ * @version 1.0.0
  */
 
-// State
+/**
+ * Current input value displayed in the calculator.
+ * @type {string}
+ */
 let currentInput = "0";
+
+/**
+ * Current expression being evaluated (first number and operator).
+ * @type {string}
+ */
 let expression = "";
+
+/**
+ * Flag indicating whether the input should be reset on next number entry.
+ * @type {boolean}
+ */
 let shouldResetInput = false;
 
-// DOM Elements
+/**
+ * DOM element for the result display.
+ * @type {HTMLElement|null}
+ */
 let displayResult;
+
+/**
+ * DOM element for the expression display.
+ * @type {HTMLElement|null}
+ */
 let displayExpression;
 
-// Font size constants
-const MAX_FONT_SIZE = 2.8; // rem
-const MIN_FONT_SIZE = 1.2; // rem
+/**
+ * Maximum font size for the result display (in rem).
+ * @type {number}
+ * @constant
+ */
+const MAX_FONT_SIZE = 2.8;
+
+/**
+ * Minimum font size for the result display (in rem).
+ * @type {number}
+ * @constant
+ */
+const MIN_FONT_SIZE = 1.2;
+
+/**
+ * Number of characters at which font size starts scaling down.
+ * @type {number}
+ * @constant
+ */
 const CHARS_AT_MAX_SIZE = 8;
+
+/**
+ * Maximum number of lines allowed in the display.
+ * @type {number}
+ * @constant
+ */
 const MAX_DISPLAY_LINES = 2;
 
 /**
- * Check if the current input fits within the display (2 lines max)
- * @returns {boolean} True if input fits, false if it would overflow
+ * Checks if the given input string fits within the display constraints (2 lines max).
+ * Temporarily applies the input to the display element and measures its height
+ * to determine if it would overflow.
+ *
+ * @function canFitInDisplay
+ * @param {string} input - The input string to check
+ * @returns {boolean} True if input fits within display, false if it would overflow
  */
 function canFitInDisplay(input) {
   if (!displayResult) return true;
@@ -64,7 +117,11 @@ function canFitInDisplay(input) {
 }
 
 /**
- * Adjust result font size based on content length
+ * Dynamically adjusts the font size of the result display based on content length.
+ * Uses maximum font size for short numbers and scales down proportionally for longer numbers.
+ *
+ * @function adjustResultFontSize
+ * @returns {void}
  */
 function adjustResultFontSize() {
   const length = currentInput.length;
@@ -80,7 +137,11 @@ function adjustResultFontSize() {
 }
 
 /**
- * Update the calculator display
+ * Updates both the result and expression displays with current values.
+ * Also adjusts font size to ensure content fits properly.
+ *
+ * @function updateDisplay
+ * @returns {void}
  */
 function updateDisplay() {
   displayResult.textContent = currentInput;
@@ -89,8 +150,12 @@ function updateDisplay() {
 }
 
 /**
- * Handle number input
- * @param {string} num - The number pressed
+ * Handles numeric input including digits and decimal point.
+ * Validates input to prevent multiple decimal points and display overflow.
+ *
+ * @function inputNumber
+ * @param {string} num - The number or decimal point to add
+ * @returns {void}
  */
 function inputNumber(num) {
   let newInput;
@@ -116,8 +181,12 @@ function inputNumber(num) {
 }
 
 /**
- * Handle operator input
- * @param {string} op - The operator pressed
+ * Handles operator input (+, -, ×, ÷).
+ * If an expression already exists, calculates it before setting the new operator.
+ *
+ * @function inputOperator
+ * @param {string} op - The operator symbol to apply
+ * @returns {void}
  */
 function inputOperator(op) {
   if (expression && !shouldResetInput) {
@@ -129,7 +198,12 @@ function inputOperator(op) {
 }
 
 /**
- * Calculate the result
+ * Calculates the result of the current expression.
+ * Handles basic arithmetic operations and division by zero.
+ * Truncates results that don't fit in the display.
+ *
+ * @function calculate
+ * @returns {void}
  */
 function calculate() {
   if (!expression) return;
@@ -183,7 +257,10 @@ function calculate() {
 }
 
 /**
- * Clear the calculator
+ * Clears the calculator, resetting input, expression, and state flags.
+ *
+ * @function clear
+ * @returns {void}
  */
 function clear() {
   currentInput = "0";
@@ -193,7 +270,11 @@ function clear() {
 }
 
 /**
- * Toggle the sign of current input
+ * Toggles the sign of the current input (positive/negative).
+ * Validates that the result would fit in the display before applying.
+ *
+ * @function toggleSign
+ * @returns {void}
  */
 function toggleSign() {
   if (currentInput !== "0") {
@@ -212,7 +293,10 @@ function toggleSign() {
 }
 
 /**
- * Calculate percentage
+ * Calculates the percentage of the current input (divides by 100).
+ *
+ * @function percentage
+ * @returns {void}
  */
 function percentage() {
   const num = parseFloat(currentInput);
@@ -221,8 +305,12 @@ function percentage() {
 }
 
 /**
- * Handle button click
- * @param {string} value - The button value
+ * Routes button click values to the appropriate handler function.
+ * Supports numbers, operators, and special functions (clear, sign toggle, percentage, equals).
+ *
+ * @function handleButtonClick
+ * @param {string} value - The button value clicked
+ * @returns {void}
  */
 function handleButtonClick(value) {
   switch (value) {
@@ -250,9 +338,12 @@ function handleButtonClick(value) {
 }
 
 /**
- * Map keyboard keys to calculator values
- * @param {string} key - The keyboard key pressed
- * @returns {string|null} The mapped calculator value or null
+ * Maps keyboard keys to their corresponding calculator values.
+ * Supports numeric keys, operators, and special function keys.
+ *
+ * @function mapKeyToValue
+ * @param {string} key - The keyboard key that was pressed
+ * @returns {string|null} The mapped calculator value, or null if key is not mapped
  */
 function mapKeyToValue(key) {
   const keyMap = {
@@ -287,7 +378,11 @@ function mapKeyToValue(key) {
 }
 
 /**
- * Handle backspace - remove last character
+ * Removes the last character from the current input.
+ * Resets to "0" if only one character remains.
+ *
+ * @function backspace
+ * @returns {void}
  */
 function backspace() {
   if (currentInput.length > 1) {
@@ -299,8 +394,12 @@ function backspace() {
 }
 
 /**
- * Handle keyboard input
- * @param {KeyboardEvent} event - The keyboard event
+ * Handles keyboard input events for calculator operations.
+ * Prevents default behavior for mapped keys and routes to appropriate handlers.
+ *
+ * @function handleKeyboard
+ * @param {KeyboardEvent} event - The keyboard event object
+ * @returns {void}
  */
 function handleKeyboard(event) {
   const value = mapKeyToValue(event.key);
@@ -318,7 +417,16 @@ function handleKeyboard(event) {
 }
 
 /**
- * Initialize the calculator
+ * Initializes the calculator component.
+ * Sets up DOM element references, attaches event listeners for buttons and keyboard,
+ * and initializes the display.
+ *
+ * @function initCalculator
+ * @returns {void}
+ *
+ * @example
+ * // Initialize calculator on page load
+ * initCalculator();
  */
 export function initCalculator() {
   const calculator = document.querySelector(".calculator");
