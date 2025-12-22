@@ -1,9 +1,23 @@
+/**
+ * @fileoverview Calculator Component Styles
+ * @description Styles for the calculator component following BEM methodology.
+ * Implements Material Design 3 principles with fixed-width layout,
+ * dynamic font scaling, and state layer overlays for interactive elements.
+ *
+ * @module calculator
+ * @version 1.0.0
+ */
+
 /* ==========================================================================
    CALCULATOR COMPONENT (BEM)
    Block: .calculator
    ========================================================================== */
 
-/* Block */
+/**
+ * Calculator container.
+ * Uses CSS Grid with 4 fixed-width columns and 1rem gap between buttons.
+ * Width is fit-content to prevent expansion beyond button layout.
+ */
 .calculator {
   display: grid;
   grid-template-columns: repeat(4, 3.5rem);
@@ -11,7 +25,15 @@
   width: fit-content;
 }
 
-/* Elements */
+/* ======================================================================
+   Elements
+   ====================================================================== */
+
+/**
+ * Calculator display container.
+ * Shows the current expression and result. Fixed height prevents overflow.
+ * Uses Material Design elevation for depth.
+ */
 .calculator__display {
   grid-column: 1 / -1;
   display: flex;
@@ -28,6 +50,11 @@
   overflow: hidden;
 }
 
+/**
+ * Expression display (top line).
+ * Shows the current operation being performed.
+ * Single line with ellipsis for overflow.
+ */
 .calculator__expression {
   width: 100%;
   font: var(--md-text-body-medium);
@@ -41,6 +68,11 @@
   white-space: nowrap;
 }
 
+/**
+ * Result display (main number).
+ * Shows the current input or calculation result.
+ * Limited to 2 lines with line-clamp, font size scales dynamically.
+ */
 .calculator__result {
   width: 100%;
   font-size: 2.8rem;
@@ -57,6 +89,11 @@
   text-overflow: ellipsis;
 }
 
+/**
+ * Calculator button base styles.
+ * Uses secondary container colors and includes state layer overlay
+ * for hover effects following Material Design 3 guidelines.
+ */
 .calculator__button {
   position: relative;
   display: inline-flex;
@@ -76,6 +113,11 @@
   transition: transform 0.1s ease;
 }
 
+/**
+ * State layer overlay for calculator buttons.
+ * Provides hover effect using semi-transparent overlay instead of
+ * changing background color directly.
+ */
 .calculator__button::before {
   content: '';
   position: absolute;
@@ -86,15 +128,31 @@
   pointer-events: none;
 }
 
+/**
+ * Hover state for calculator buttons.
+ * Applies 8% opacity overlay on secondary container color.
+ */
 .calculator__button:hover::before {
-  background: var(--State-Layers-On-Secondary-Container-Opacity-08, rgba(74, 68, 89, 0.08));
+    background: var(--State-Layers-On-Secondary-Container-Opacity-08, rgba(74, 68, 89, 0.08));
 }
 
+/**
+ * Active/pressed state for calculator buttons.
+ * Slight scale down provides tactile feedback.
+ */
 .calculator__button:active {
-  transform: scale(0.96);
+    transform: scale(0.96);
 }
 
-/* Modifier: wide button (spans 2 columns) */
+/* ======================================================================
+   Modifiers
+   ====================================================================== */
+
+/**
+ * Wide button modifier.
+ * Spans 2 columns in the grid (used for the zero button).
+ * Width calculated to include gap between columns.
+ */
 .calculator__button--wide {
   grid-column: span 2;
   width: calc(3.5rem * 2 + 1rem);

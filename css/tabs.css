@@ -1,9 +1,21 @@
+/**
+ * @fileoverview Tabs Component Styles
+ * @description Material Design 3 style tabs with panel switching.
+ * Implements animated transitions and active state indicators.
+ *
+ * @module tabs
+ * @version 1.0.0
+ */
+
 /* ==========================================================================
    TABS COMPONENT (BEM)
    Block: .tabs
    ========================================================================== */
 
-/* Block */
+/**
+ * Tabs container.
+ * Uses flexbox column layout with Material Design elevation.
+ */
 .tabs {
   display: flex;
   flex-direction: column;
@@ -13,7 +25,14 @@
   overflow: hidden;
 }
 
-/* Elements */
+/* ======================================================================
+   Elements
+   ====================================================================== */
+
+/**
+ * Tabs header container.
+ * Contains tab items and provides border separation from content.
+ */
 .tabs__header {
   display: flex;
   position: relative;
@@ -21,6 +40,10 @@
   border-bottom: 0.0625rem solid var(--md-sys-color-outline-variant);
 }
 
+/**
+ * Individual tab item.
+ * Clickable button that activates a corresponding panel.
+ */
 .tabs__item {
   display: inline-flex;
   flex-direction: column;
@@ -50,11 +73,19 @@
   color: var(--md-sys-color-on-surface);
 }
 
+/**
+ * Tab label text container.
+ * Provides positioning context for active indicator.
+ */
 .tabs__label {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
+/**
+ * Tab indicator (unused in current implementation).
+ * Reserved for future animated indicator bar.
+ */
 .tabs__indicator {
   position: absolute;
   bottom: 0;
@@ -65,15 +96,30 @@
     width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/**
+ * Tabs content container.
+ * Wraps all tab panels and provides consistent padding.
+ */
 .tabs__content {
-  padding: 24px;
+    padding: 24px;
 }
 
+/**
+ * Tab panel container.
+ * Hidden by default, shown when active.
+ */
 .tabs__panel {
-  display: none;
+    display: none;
 }
 
-/* Modifiers */
+/* ======================================================================
+   Modifiers
+   ====================================================================== */
+
+/**
+ * Active tab item.
+ * Uses primary color and shows bottom indicator line.
+ */
 .tabs__item--active {
   color: var(--md-sys-color-primary);
 }
@@ -95,12 +141,23 @@
   border-radius: 6.25rem 6.25rem 0 0;
 }
 
+/**
+ * Active tab panel.
+ * Displayed with fade-in animation when activated.
+ */
 .tabs__panel--active {
-  display: block;
-  animation: tabs-fade-in 0.2s ease;
+    display: block;
+    animation: tabs-fade-in 0.2s ease;
 }
 
-/* Animations */
+/* ======================================================================
+   Animations
+   ====================================================================== */
+
+/**
+ * Fade-in animation for tab panels.
+ * Provides smooth transition when switching between tabs.
+ */
 @keyframes tabs-fade-in {
   from {
     opacity: 0;
