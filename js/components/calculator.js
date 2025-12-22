@@ -16,6 +16,52 @@ let displayExpression;
 const MAX_FONT_SIZE = 2.8; // rem
 const MIN_FONT_SIZE = 1.2; // rem
 const CHARS_AT_MAX_SIZE = 8;
+const MAX_DISPLAY_LINES = 2;
+
+/**
+ * Check if the current input fits within the display (2 lines max)
+ * @returns {boolean} True if input fits, false if it would overflow
+ */
+function canFitInDisplay(input) {
+  if (!displayResult) return true;
+
+  // Temporarily set the text to check if it fits
+  const originalText = displayResult.textContent;
+  const originalFontSize = displayResult.style.fontSize;
+  const originalDisplay = displayResult.style.display;
+
+  // Calculate expected font size
+  const length = input.length;
+  let fontSize;
+  if (length <= CHARS_AT_MAX_SIZE) {
+    fontSize = MAX_FONT_SIZE;
+  } else {
+    const scale = CHARS_AT_MAX_SIZE / length;
+    fontSize = Math.max(MIN_FONT_SIZE, MAX_FONT_SIZE * scale);
+  }
+
+  // Set temporary values
+  displayResult.textContent = input;
+  displayResult.style.fontSize = `${fontSize}rem`;
+  displayResult.style.display = '-webkit-box'; // Ensure line-clamp is active
+
+  // Force a reflow to get accurate measurements
+  displayResult.offsetHeight;
+
+  // Check if content fits (scrollHeight should not exceed 2 lines)
+  // Get computed line-height
+  const computedStyle = window.getComputedStyle(displayResult);
+  const lineHeightValue = parseFloat(computedStyle.lineHeight);
+  const maxHeight = lineHeightValue * MAX_DISPLAY_LINES;
+  const actualHeight = displayResult.scrollHeight;
+
+  // Restore original values
+  displayResult.textContent = originalText;
+  displayResult.style.fontSize = originalFontSize;
+  displayResult.style.display = originalDisplay;
+
+  return actualHeight <= maxHeight;
+}
 
 /**
  * Adjust result font size based on content length
@@ -47,16 +93,25 @@ function updateDisplay() {
  * @param {string} num - The number pressed
  */
 function inputNumber(num) {
+  let newInput;
+
   if (shouldResetInput) {
-    currentInput = num;
+    newInput = num;
     shouldResetInput = false;
   } else if (currentInput === "0" && num !== ".") {
-    currentInput = num;
+    newInput = num;
   } else if (num === "." && currentInput.includes(".")) {
     return; // Prevent multiple decimals
   } else {
-    currentInput += num;
+    newInput = currentInput + num;
   }
+
+  // Check if the new input would fit in the display
+  if (!canFitInDisplay(newInput)) {
+    return; // Don't accept more characters if it won't fit
+  }
+
+  currentInput = newInput;
   updateDisplay();
 }
 
@@ -105,7 +160,19 @@ function calculate() {
   // Format result to avoid floating point issues
   if (typeof result === "number") {
     result = Math.round(result * 1000000000) / 1000000000;
-    currentInput = result.toString();
+    const resultString = result.toString();
+
+    // If result doesn't fit, truncate it
+    if (!canFitInDisplay(resultString)) {
+      // Find the maximum length that fits
+      let truncated = resultString;
+      while (truncated.length > 0 && !canFitInDisplay(truncated)) {
+        truncated = truncated.slice(0, -1);
+      }
+      currentInput = truncated || "0";
+    } else {
+      currentInput = resultString;
+    }
   } else {
     currentInput = result;
   }
@@ -130,9 +197,16 @@ function clear() {
  */
 function toggleSign() {
   if (currentInput !== "0") {
-    currentInput = currentInput.startsWith("-")
+    const newInput = currentInput.startsWith("-")
       ? currentInput.slice(1)
       : "-" + currentInput;
+
+    // Check if the new input would fit in the display
+    if (!canFitInDisplay(newInput)) {
+      return; // Don't toggle if it won't fit
+    }
+
+    currentInput = newInput;
     updateDisplay();
   }
 }
