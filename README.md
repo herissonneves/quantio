@@ -5,13 +5,23 @@ A modern calculator and unit converter web application built with vanilla JavaSc
 ## Features
 
 ### Calculator
+
 - Basic arithmetic operations: addition, subtraction, multiplication, division
 - Percentage calculations
 - Sign toggle (positive/negative)
 - Real-time expression display
 - Error handling for division by zero
+- **Keyboard support**: Use your keyboard to input numbers and operations
+  - Numbers: `0-9`
+  - Operators: `+`, `-`, `*` (×), `/` (÷)
+  - Equals: `Enter` or `=`
+  - Clear: `Escape`, `C`, or `Delete`
+  - Backspace: Remove last character
+- **Dynamic font scaling**: Display automatically adjusts font size for long numbers
+- **Fixed width layout**: Calculator maintains consistent size regardless of input length
 
-### Converter *(Coming Soon)*
+### Converter _(Coming Soon)_
+
 - Length conversion
 - Mass/Weight conversion
 - Temperature conversion
@@ -45,7 +55,8 @@ quantio/
 │   ├── main.js           # Application entry point
 │   └── components/
 │       ├── calculator.js # Calculator logic
-│       └── tabs.js       # Tabs navigation
+│       ├── tabs.js       # Tabs navigation
+│       └── theme-toggle.js # Theme and contrast selector
 └── index.html            # Main HTML file
 ```
 
@@ -53,20 +64,23 @@ quantio/
 
 Quantio supports 6 theme variants following Material Design 3 guidelines:
 
-| Theme | Description |
-|-------|-------------|
-| `theme-light.css` | Light theme (default) |
+| Theme                | Description                   |
+| -------------------- | ----------------------------- |
+| `theme-light.css`    | Light theme (default)         |
 | `theme-light-mc.css` | Light theme - Medium Contrast |
-| `theme-light-hc.css` | Light theme - High Contrast |
-| `theme-dark.css` | Dark theme |
-| `theme-dark-mc.css` | Dark theme - Medium Contrast |
-| `theme-dark-hc.css` | Dark theme - High Contrast |
+| `theme-light-hc.css` | Light theme - High Contrast   |
+| `theme-dark.css`     | Dark theme                    |
+| `theme-dark-mc.css`  | Dark theme - Medium Contrast  |
+| `theme-dark-hc.css`  | Dark theme - High Contrast    |
 
-To change the theme, update the theme stylesheet link in `index.html`:
+### Theme Controls
 
-```html
-<link rel="stylesheet" href="css/themes/theme-dark.css">
-```
+The application includes built-in theme controls in the header:
+
+- **Theme Toggle**: Switch between light and dark themes
+- **Contrast Selector**: Choose between default, medium contrast, and high contrast variants
+
+Your theme and contrast preferences are automatically saved to localStorage and persist across sessions. The app also detects your system's color scheme preference on first visit.
 
 ## Getting Started
 
@@ -84,4 +98,3 @@ To change the theme, update the theme stylesheet link in `index.html`:
 ## License
 
 MIT License
-
