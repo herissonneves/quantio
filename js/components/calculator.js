@@ -396,12 +396,19 @@ function backspace() {
 /**
  * Handles keyboard input events for calculator operations.
  * Prevents default behavior for mapped keys and routes to appropriate handlers.
+ * Only processes events when calculator is active and input is not focused.
  *
  * @function handleKeyboard
  * @param {KeyboardEvent} event - The keyboard event object
  * @returns {void}
  */
 function handleKeyboard(event) {
+  // Don't interfere if user is typing in an input field
+  const target = event.target;
+  if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT')) {
+    return;
+  }
+
   const value = mapKeyToValue(event.key);
 
   if (value === null) return;
