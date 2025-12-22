@@ -171,11 +171,12 @@
 
           <!--
             Converter Tab Panel
-            Contains unit conversion interface (coming soon)
+            Contains unit conversion interface
           -->
           <div class="tabs__panel"
                id="converter">
             <div class="converter">
+              <!-- Category selector -->
               <label class="converter__label"
                      for="category-select">Conversion category:</label>
               <select class="converter__select"
@@ -187,6 +188,43 @@
                 <option value="volume">Volume</option>
                 <option value="time">Time</option>
               </select>
+
+              <!-- Input field with unit selector -->
+              <div class="converter__field">
+                <label class="converter__field-label" for="input-value">From:</label>
+                <div class="converter__input-group">
+                  <input type="number"
+                         class="converter__input"
+                         id="input-value"
+                         placeholder="0"
+                         step="any"
+                         inputmode="decimal">
+                  <select class="converter__unit-select"
+                          id="input-unit"
+                          aria-label="Input unit">
+                    <!-- Options populated by JavaScript -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- Output field with unit selector -->
+              <div class="converter__field">
+                <label class="converter__field-label" for="output-value">To:</label>
+                <div class="converter__input-group">
+                  <input type="number"
+                         class="converter__input"
+                         id="output-value"
+                         placeholder="0"
+                         step="any"
+                         inputmode="decimal"
+                         readonly>
+                  <select class="converter__unit-select"
+                          id="output-unit"
+                          aria-label="Output unit">
+                    <!-- Options populated by JavaScript -->
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
         </div>

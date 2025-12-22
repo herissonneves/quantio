@@ -12,6 +12,7 @@
 import { initTabs } from './components/tabs.js';
 import { initCalculator } from './components/calculator.js';
 import { initThemeToggle } from './components/theme-toggle.js';
+import { initConverter } from './components/converter.js';
 
 /**
  * Initializes the application by setting up all components.
@@ -28,6 +29,8 @@ function init() {
     initTabs();
     // Initialize calculator functionality
     initCalculator();
+    // Initialize converter functionality
+    initConverter();
 }
 
 /**
