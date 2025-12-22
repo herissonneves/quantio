@@ -1,54 +1,103 @@
 <!DOCTYPE html>
+<!--
+  @fileoverview Quantio - Main HTML Document
+  @description Entry point for the Quantio calculator and unit converter application.
+  Implements Material Design 3 principles with theme support and accessibility features.
+
+  @author Quantio Development Team
+  @version 1.0.0
+-->
 <html lang="pt-BR">
 
   <head>
+    <!-- Character encoding -->
     <meta charset="UTF-8">
+
+    <!-- Viewport configuration for responsive design -->
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
     <title>Quantio</title>
+
+    <!-- Google Fonts: Roboto (Material Design typeface) -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
           rel="stylesheet">
-    <!-- Theme (default: light) -->
+
+    <!--
+      Theme stylesheet (dynamically changed by theme-toggle.js)
+      Default: light theme
+    -->
     <link rel="stylesheet"
           href="css/themes/theme-light.css"
           id="theme-stylesheet">
-    <!-- Base & Components -->
+
+    <!-- Base styles: typography, spacing, design tokens -->
     <link rel="stylesheet"
           href="css/base.css">
+
+    <!-- Tabs component styles -->
     <link rel="stylesheet"
           href="css/tabs.css">
+
+    <!-- Calculator component styles -->
     <link rel="stylesheet"
           href="css/calculator.css">
+
+    <!-- Converter component styles -->
     <link rel="stylesheet"
           href="css/converter.css">
   </head>
 
   <body>
+    <!-- Main application container -->
     <main>
+      <!--
+        Application header
+        Contains title and theme controls
+      -->
       <header class="header">
+        <!-- Application title with colored accent letters -->
         <h1>Quant<span class="text--green">i</span><span class="text--red">o</span></h1>
+
+        <!-- Theme controls container -->
         <div class="theme-controls">
+          <!--
+            Theme toggle button
+            Switches between light and dark themes
+            Icons are shown/hidden based on current theme via CSS
+          -->
           <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+            <!-- Sun icon (shown in dark mode) -->
             <svg class="theme-toggle__icon theme-toggle__icon--light" viewBox="0 0 24 24" width="24" height="24">
               <path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
             </svg>
+            <!-- Moon icon (shown in light mode) -->
             <svg class="theme-toggle__icon theme-toggle__icon--dark" viewBox="0 0 24 24" width="24" height="24">
               <path fill="currentColor" d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
             </svg>
           </button>
+
+          <!--
+            Contrast selector
+            Allows users to choose between default, medium, and high contrast levels
+          -->
           <div class="contrast-selector" id="contrast-selector">
+            <!-- Default contrast button -->
             <button class="contrast-selector__btn contrast-selector__btn--active" data-contrast="default" type="button" aria-label="Default contrast">
               <svg viewBox="0 0 24 24" width="20" height="20">
                 <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
                 <path fill="currentColor" d="M12 4a8 8 0 000 16V4z"/>
               </svg>
             </button>
+            <!-- Medium contrast button -->
             <button class="contrast-selector__btn" data-contrast="mc" type="button" aria-label="Medium contrast">
               <svg viewBox="0 0 24 24" width="20" height="20">
                 <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
                 <path fill="currentColor" d="M12 4a8 8 0 000 16V4z" opacity="0.7"/>
               </svg>
             </button>
+            <!-- High contrast button -->
             <button class="contrast-selector__btn" data-contrast="hc" type="button" aria-label="High contrast">
               <svg viewBox="0 0 24 24" width="20" height="20">
                 <circle cx="12" cy="12" r="8" fill="currentColor"/>
@@ -57,7 +106,13 @@
           </div>
         </div>
       </header>
+
+      <!--
+        Tabs section
+        Contains navigation tabs and tab panels for Calculator and Converter
+      -->
       <section class="tabs">
+        <!-- Tabs navigation header -->
         <div class="tabs__header">
           <button class="tabs__item tabs__item--active"
                   data-tab="calculator">
@@ -68,56 +123,56 @@
             <span class="tabs__label">Converter</span>
           </button>
         </div>
+
+        <!-- Tabs content panels -->
         <div class="tabs__content">
-          <!-- Calculator Tab -->
+          <!--
+            Calculator Tab Panel
+            Contains the calculator component with display and buttons
+          -->
           <div class="tabs__panel tabs__panel--active"
                id="calculator">
             <div class="calculator">
+              <!-- Calculator display: shows expression and result -->
               <div class="calculator__display">
                 <span class="calculator__expression"></span>
                 <span class="calculator__result">0</span>
               </div>
-              <button class="calculator__button"
-                      type="button">C</button>
-              <button class="calculator__button"
-                      type="button">±</button>
-              <button class="calculator__button"
-                      type="button">%</button>
-              <button class="calculator__button"
-                      type="button">÷</button>
-              <button class="calculator__button"
-                      type="button">7</button>
-              <button class="calculator__button"
-                      type="button">8</button>
-              <button class="calculator__button"
-                      type="button">9</button>
-              <button class="calculator__button"
-                      type="button">×</button>
-              <button class="calculator__button"
-                      type="button">4</button>
-              <button class="calculator__button"
-                      type="button">5</button>
-              <button class="calculator__button"
-                      type="button">6</button>
-              <button class="calculator__button"
-                      type="button">-</button>
-              <button class="calculator__button"
-                      type="button">1</button>
-              <button class="calculator__button"
-                      type="button">2</button>
-              <button class="calculator__button"
-                      type="button">3</button>
-              <button class="calculator__button"
-                      type="button">+</button>
-              <button class="calculator__button calculator__button--wide"
-                      type="button">0</button>
-              <button class="calculator__button"
-                      type="button">.</button>
-              <button class="calculator__button"
-                      type="button">=</button>
+              <!-- Calculator buttons: Row 1 - Functions -->
+              <button class="calculator__button" type="button">C</button>  <!-- Clear -->
+              <button class="calculator__button" type="button">±</button>  <!-- Toggle sign -->
+              <button class="calculator__button" type="button">%</button>  <!-- Percentage -->
+              <button class="calculator__button" type="button">÷</button> <!-- Division -->
+
+              <!-- Calculator buttons: Row 2 - Numbers 7-9 and Multiplication -->
+              <button class="calculator__button" type="button">7</button>
+              <button class="calculator__button" type="button">8</button>
+              <button class="calculator__button" type="button">9</button>
+              <button class="calculator__button" type="button">×</button> <!-- Multiplication -->
+
+              <!-- Calculator buttons: Row 3 - Numbers 4-6 and Subtraction -->
+              <button class="calculator__button" type="button">4</button>
+              <button class="calculator__button" type="button">5</button>
+              <button class="calculator__button" type="button">6</button>
+              <button class="calculator__button" type="button">-</button> <!-- Subtraction -->
+
+              <!-- Calculator buttons: Row 4 - Numbers 1-3 and Addition -->
+              <button class="calculator__button" type="button">1</button>
+              <button class="calculator__button" type="button">2</button>
+              <button class="calculator__button" type="button">3</button>
+              <button class="calculator__button" type="button">+</button> <!-- Addition -->
+
+              <!-- Calculator buttons: Row 5 - Zero (wide), Decimal, Equals -->
+              <button class="calculator__button calculator__button--wide" type="button">0</button> <!-- Wide button spans 2 columns -->
+              <button class="calculator__button" type="button">.</button> <!-- Decimal point -->
+              <button class="calculator__button" type="button">=</button> <!-- Equals/Calculate -->
             </div>
           </div>
-          <!-- Converter Tab -->
+
+          <!--
+            Converter Tab Panel
+            Contains unit conversion interface (coming soon)
+          -->
           <div class="tabs__panel"
                id="converter">
             <div class="converter">
@@ -138,7 +193,10 @@
       </section>
     </main>
 
-    <!-- Scripts -->
+    <!--
+      Application JavaScript
+      ES6 module that initializes all components
+    -->
     <script type="module"
             src="js/main.js"></script>
   </body>
