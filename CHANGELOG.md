@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 #### Calculator
+
 - Basic arithmetic operations (addition, subtraction, multiplication, division)
 - Percentage calculations
 - Sign toggle (positive/negative)
@@ -29,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Display limited to maximum 2 lines
 
 #### Converter
+
 - Unit conversion functionality with 5 categories:
   - Length (mm, cm, dm, m, dam, hm, km, in, ft, yd, mi, nmi)
   - Mass/Weight (mg, cg, dg, g, dag, hg, kg, t, oz, lb, st)
@@ -41,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Readonly output field
 
 #### Theming
+
 - Theme toggle (light/dark)
 - Contrast selector (default, medium, high)
 - 6 theme variants following Material Design 3
@@ -48,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - System color scheme detection
 
 #### UI/UX
+
 - Material Design 3 design system
 - Tabs navigation for Calculator and Converter
 - Responsive layout
@@ -76,4 +80,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/herissonneves/quantio/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/herissonneves/quantio/releases/tag/v1.0.0
-
