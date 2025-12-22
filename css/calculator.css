@@ -6,8 +6,9 @@
 /* Block */
 .calculator {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(4, 3.5rem);
+  gap: 1rem;
+  width: fit-content;
 }
 
 /* Elements */
@@ -27,6 +28,7 @@
 }
 
 .calculator__expression {
+  width: 100%;
   font: var(--md-text-body-medium);
   color: var(--md-sys-color-on-surface-variant);
   min-height: 1.25rem;
@@ -35,10 +37,14 @@
 }
 
 .calculator__result {
-  font: var(--md-text-display-medium);
+  width: 100%;
+  font-size: 2.8rem;
+  line-height: 1.2;
+  font-weight: 400;
   color: var(--md-sys-color-on-surface);
   word-break: break-all;
   text-align: right;
+  overflow-wrap: break-word;
 }
 
 .calculator__button {
@@ -76,4 +82,10 @@
 
 .calculator__button:active {
   transform: scale(0.96);
+}
+
+/* Modifier: wide button (spans 2 columns) */
+.calculator__button--wide {
+  grid-column: span 2;
+  width: calc(3.5rem * 2 + 1rem);
 }
