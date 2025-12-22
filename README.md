@@ -2,6 +2,8 @@
 
 A modern calculator and unit converter web application built with vanilla JavaScript and Material Design 3 principles.
 
+🌐 **Live Demo**: [https://herissonneves.github.io/quantio/](https://herissonneves.github.io/quantio/)
+
 ## Features
 
 ### Calculator
@@ -90,6 +92,12 @@ The application includes built-in theme controls in the header:
 Your theme and contrast preferences are automatically saved to localStorage and persist across sessions. The app also detects your system's color scheme preference on first visit.
 
 ## Getting Started
+
+### Online
+
+Visit the live application at [https://herissonneves.github.io/quantio/](https://herissonneves.github.io/quantio/)
+
+### Local Development
 
 1. Clone the repository
 2. Open `index.html` in a modern web browser
