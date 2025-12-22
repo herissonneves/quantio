@@ -20,13 +20,19 @@ A modern calculator and unit converter web application built with vanilla JavaSc
 - **Dynamic font scaling**: Display automatically adjusts font size for long numbers
 - **Fixed width layout**: Calculator maintains consistent size regardless of input length
 
-### Converter _(Coming Soon)_
+### Converter
 
-- Length conversion
-- Mass/Weight conversion
-- Temperature conversion
-- Volume conversion
-- Time conversion
+- **5 conversion categories**: Length, Mass/Weight, Temperature, Volume, Time
+- **Real-time conversion**: Results update automatically as you type
+- **Comprehensive unit support**:
+  - **Length**: mm, cm, dm, m, dam, hm, km, in, ft, yd, mi, nmi
+  - **Mass**: mg, cg, dg, g, dag, hg, kg, t, oz, lb, st
+  - **Temperature**: °C, °F, K (with special conversion formulas)
+  - **Volume**: ml, cl, dl, L, dal, hl, m³, fl oz, cup, pt, qt, gal
+  - **Time**: ns, µs, ms, s, min, h, d, wk, mo, yr
+- **Input validation**: Limits input and output to 8 bytes maximum
+- **Material Design 3 outlined fields**: Clean, accessible interface
+- **Readonly output**: Result field is protected from manual editing
 
 ## Tech Stack
 
@@ -55,6 +61,7 @@ quantio/
 │   ├── main.js           # Application entry point
 │   └── components/
 │       ├── calculator.js # Calculator logic
+│       ├── converter.js  # Unit converter logic
 │       ├── tabs.js       # Tabs navigation
 │       └── theme-toggle.js # Theme and contrast selector
 └── index.html            # Main HTML file
