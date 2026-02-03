@@ -66,6 +66,12 @@ quantio/
 │       ├── converter.js  # Unit converter logic
 │       ├── tabs.js       # Tabs navigation
 │       └── theme-toggle.js # Theme and contrast selector
+├── tests/
+│   ├── index.html        # Test runner page
+│   ├── test-runner.js    # Minimal test framework (no deps)
+│   ├── run.js            # Loads tests and runs them
+│   ├── calculator.test.js
+│   └── converter.test.js
 └── index.html            # Main HTML file
 ```
 
@@ -102,6 +108,15 @@ Visit the live application at [https://herissonneves.github.io/quantio/](https:/
 1. Clone the repository
 2. Open `index.html` in a modern web browser
 3. No build process required - it's vanilla HTML/CSS/JS!
+
+### Testing
+
+Unit tests run in the browser with **no external dependencies**. Open the test page:
+
+- **Online**: [https://herissonneves.github.io/quantio/tests/](https://herissonneves.github.io/quantio/tests/)
+- **Local**: serve the project (e.g. `npx serve .` or `python -m http.server`) and visit `/tests/`, or open `tests/index.html` in a browser (modules may require a local server)
+
+Tests cover calculator logic (arithmetic, keyboard mapping) and converter logic (unit conversion, byte size limits).
 
 ## Browser Support
 

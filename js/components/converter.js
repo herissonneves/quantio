@@ -12,7 +12,7 @@
  * Each unit has a name, abbreviation, and conversion factor to base unit (meter, gram, etc.).
  * @type {Object<string, Array<Object>>}
  */
-const UNIT_DEFINITIONS = {
+export const UNIT_DEFINITIONS = {
     length: [
         { name: 'Millimeter', abbr: 'mm', factor: 0.001 },
         { name: 'Centimeter', abbr: 'cm', factor: 0.01 },
@@ -123,26 +123,31 @@ function populateUnitSelectors() {
 }
 
 /**
- * Converts a value from one unit to another.
+ * Converts a value from one unit to another (pure function for testing).
  * Handles special case for temperature conversions.
  *
- * @function convert
+ * @function convertValue
  * @param {number} value - The value to convert
- * @param {number} fromIndex - Index of source unit in UNIT_DEFINITIONS
- * @param {number} toIndex - Index of target unit in UNIT_DEFINITIONS
+ * @param {number} fromIndex - Index of source unit in UNIT_DEFINITIONS[category]
+ * @param {number} toIndex - Index of target unit in UNIT_DEFINITIONS[category]
+ * @param {string} category - Conversion category (length, mass, temperature, volume, time)
  * @returns {number} The converted value
  */
-function convert(value, fromIndex, toIndex) {
+export function convertValue(value, fromIndex, toIndex, category) {
     if (isNaN(value) || value === '') {
         return 0;
     }
 
-    const units = UNIT_DEFINITIONS[currentCategory];
+    const units = UNIT_DEFINITIONS[category];
+    if (!units || !units[fromIndex] || !units[toIndex]) {
+        return 0;
+    }
+
     const fromUnit = units[fromIndex];
     const toUnit = units[toIndex];
 
     // Special handling for temperature
-    if (currentCategory === 'temperature') {
+    if (category === 'temperature') {
         // Convert to base unit (Celsius)
         let celsius;
         if (fromUnit.abbr === '°C') {
@@ -169,13 +174,26 @@ function convert(value, fromIndex, toIndex) {
 }
 
 /**
+ * Converts a value from one unit to another (uses current category).
+ *
+ * @function convert
+ * @param {number} value - The value to convert
+ * @param {number} fromIndex - Index of source unit in UNIT_DEFINITIONS
+ * @param {number} toIndex - Index of target unit in UNIT_DEFINITIONS
+ * @returns {number} The converted value
+ */
+function convert(value, fromIndex, toIndex) {
+    return convertValue(value, fromIndex, toIndex, currentCategory);
+}
+
+/**
  * Gets the byte size of a string.
  *
  * @function getByteSize
  * @param {string} str - The string to measure
  * @returns {number} The size in bytes
  */
-function getByteSize(str) {
+export function getByteSize(str) {
     return new Blob([str]).size;
 }
 
@@ -246,7 +264,7 @@ function validateAndLimitInput() {
  * @param {number} value - The numeric value to format
  * @returns {string} The formatted value limited to 8 bytes
  */
-function limitOutputSize(value) {
+export function limitOutputSize(value) {
     if (isNaN(value) || value === null || value === undefined) {
         return '';
     }

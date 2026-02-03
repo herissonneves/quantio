@@ -198,6 +198,30 @@ function inputOperator(op) {
 }
 
 /**
+ * Evaluates a single operation (pure function for testing).
+ *
+ * @function evaluateOperation
+ * @param {number} firstNum - First operand
+ * @param {string} operator - Operator (+, -, ×, ÷)
+ * @param {number} secondNum - Second operand
+ * @returns {number|string} The result or 'Error' for division by zero
+ */
+export function evaluateOperation(firstNum, operator, secondNum) {
+  switch (operator) {
+    case "+":
+      return firstNum + secondNum;
+    case "-":
+      return firstNum - secondNum;
+    case "×":
+      return firstNum * secondNum;
+    case "÷":
+      return secondNum !== 0 ? firstNum / secondNum : "Error";
+    default:
+      return NaN;
+  }
+}
+
+/**
  * Calculates the result of the current expression.
  * Handles basic arithmetic operations and division by zero.
  * Truncates results that don't fit in the display.
@@ -213,28 +237,12 @@ function calculate() {
   const operator = parts[1];
   const secondNum = parseFloat(currentInput);
 
-  let result;
-  switch (operator) {
-    case "+":
-      result = firstNum + secondNum;
-      break;
-    case "-":
-      result = firstNum - secondNum;
-      break;
-    case "×":
-      result = firstNum * secondNum;
-      break;
-    case "÷":
-      result = secondNum !== 0 ? firstNum / secondNum : "Error";
-      break;
-    default:
-      return;
-  }
+  const result = evaluateOperation(firstNum, operator, secondNum);
 
   // Format result to avoid floating point issues
   if (typeof result === "number") {
-    result = Math.round(result * 1000000000) / 1000000000;
-    const resultString = result.toString();
+    const roundedResult = Math.round(result * 1000000000) / 1000000000;
+    const resultString = roundedResult.toString();
 
     // If result doesn't fit, truncate it
     if (!canFitInDisplay(resultString)) {
@@ -376,6 +384,9 @@ function mapKeyToValue(key) {
   };
   return keyMap[key] || null;
 }
+
+// Export mapKeyToValue for testing
+export { mapKeyToValue };
 
 /**
  * Removes the last character from the current input.
