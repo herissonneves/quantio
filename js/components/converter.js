@@ -4,7 +4,7 @@
  * Suporta length, mass, temperature, volume e time.
  *
  * @module components/converter
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 import { UNIT_DEFINITIONS } from './converter/units.js';

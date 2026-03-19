@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-03-17
+
+### Changed
+- Refactored the calculator component into dedicated modules.
+- Refactored the converter component into dedicated modules.
+- Ensured JSDoc documentation added during the refactor is English-only.
+
 ## [1.0.0] - 2024-12-22
 
 ### Added
@@ -78,5 +85,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HTML documentation with section comments
 - README with complete feature list and project structure
 
-[Unreleased]: https://github.com/herissonneves/quantio/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/herissonneves/quantio/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/herissonneves/quantio/releases/tag/v1.0.1
 [1.0.0]: https://github.com/herissonneves/quantio/releases/tag/v1.0.0

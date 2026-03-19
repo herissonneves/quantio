@@ -4,6 +4,10 @@ A modern calculator and unit converter web application built with vanilla JavaSc
 
 🌐 **Live Demo**: [https://herissonneves.github.io/quantio/](https://herissonneves.github.io/quantio/)
 
+## Current Version
+
+[`v1.0.1`](https://github.com/herissonneves/quantio/releases/tag/v1.0.1)
+
 ## Features
 
 ### Calculator

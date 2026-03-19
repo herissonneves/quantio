@@ -5,7 +5,7 @@
  * and deactivates all others.
  *
  * @module components/tabs
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 /**
