@@ -1,0 +1,165 @@
+/**
+ * @fileoverview Tool surface + shared history panel styles.
+ * Layout: .app-workspace groups section.tabs and aside.history-panel (siblings).
+ * @module history
+ */
+
+/**
+ * Row under the header: tabs card + history card (history is outside section.tabs).
+ */
+.app-workspace {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  /* If the viewport is too narrow, scroll instead of clipping the calculator. */
+  overflow-x: auto;
+}
+
+.app-workspace > .tabs {
+  flex: 1 1 auto;
+  /* Never shrink below calculator + .tabs__content horizontal padding (24px × 2). */
+  min-width: calc(4 * 4rem + 3 * 1rem + 2 * 1rem + 48px);
+}
+
+/**
+ * Primary tool surface — calculator or converter only.
+ */
+.tool-panel {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.30), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Calculator stretches across the tab content; columns grow with available width. */
+.tool-panel:has(.calculator) {
+  width: 100%;
+  min-width: calc(4 * 4rem + 3 * 1rem + 2 * 1rem);
+  overflow: visible;
+}
+
+/**
+ * Shared history surface (sibling of section.tabs inside .app-workspace).
+ */
+.history-panel.component-history {
+  margin: 0 0 0 auto;
+  flex: 0 1 22rem;
+  min-width: 12rem;
+  max-width: 22rem;
+  /* Stretch with the tabs card (same top/bottom); list scrolls inside .component-history__list */
+  align-self: stretch;
+  min-height: 10rem;
+  overflow: hidden;
+}
+
+.component-history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  background: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.30), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+.component-history__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.component-history__title {
+  margin: 0;
+  font: var(--md-text-title-small);
+  letter-spacing: var(--md-letter-spacing-title-small);
+  color: var(--md-sys-color-on-surface);
+}
+
+.component-history__clear {
+  flex-shrink: 0;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--md-sys-color-outline);
+  background: transparent;
+  font: var(--md-text-label-large);
+  color: var(--md-sys-color-primary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.component-history__clear:hover {
+  background: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent);
+  border-color: var(--md-sys-color-primary);
+}
+
+.component-history__clear:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+.component-history__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.component-history__item {
+  font: var(--md-text-body-small);
+  color: var(--md-sys-color-on-surface-variant);
+  padding: 0.5rem 0.35rem;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  word-break: break-word;
+}
+
+.component-history__item:last-child {
+  border-bottom: none;
+}
+
+.component-history__item[role="button"] {
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+.component-history__item[role="button"]:hover,
+.component-history__item[role="button"]:focus-visible {
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .app-workspace {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  .tool-panel {
+    align-self: stretch;
+    width: 100%;
+  }
+
+  .history-panel.component-history {
+    margin-left: 0;
+    max-width: none;
+    width: 100%;
+    flex: 1 1 auto;
+    max-height: 20rem;
+  }
+}
