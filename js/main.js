@@ -6,7 +6,7 @@
  * theme management, tabs navigation, and calculator functionality.
  *
  * @author Quantio Development Team
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 import { initTabs } from './components/tabs.js';

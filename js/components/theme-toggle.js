@@ -5,7 +5,7 @@
  * Supports three contrast levels: default, medium contrast (mc), and high contrast (hc).
  *
  * @module components/theme-toggle
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 /**

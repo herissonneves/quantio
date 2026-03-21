@@ -4,6 +4,10 @@ A modern calculator and unit converter web application built with vanilla JavaSc
 
 🌐 **Live Demo**: [https://herissonneves.github.io/quantio/](https://herissonneves.github.io/quantio/)
 
+## Current Version
+
+[`v1.0.1`](https://github.com/herissonneves/quantio/releases/tag/v1.0.1)
+
 ## Features
 
 - **History**: One shared panel sits beside the tabs card (outside `section.tabs`) and stays visible when switching Calculator / Converter. The list shows the active tool’s history. Calculator logs completed `=` calculations; converter logs conversions (debounced) while you type. Both persist in `localStorage`. Tap a calculator history row to load its result.
