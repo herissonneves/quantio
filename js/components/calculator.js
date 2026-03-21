@@ -9,6 +9,10 @@ import { createCalculatorActions } from "./calculator/actions.js";
 import { createKeyboardHandler } from "./calculator/keyboard.js";
 import { evaluateOperation } from "./calculator/operations.js";
 import { mapKeyToValue } from "./calculator/keymap.js";
+import {
+  addCalculatorHistoryEntry,
+  registerCalculatorHistoryTarget,
+} from "./app-history.js";
 
 export { evaluateOperation, mapKeyToValue };
 
@@ -34,10 +38,25 @@ export function initCalculator() {
     shouldResetInput: false,
   };
 
-  const actions = createCalculatorActions({
+  /** @type {ReturnType<typeof createCalculatorActions>} */
+  let actions;
+
+  actions = createCalculatorActions({
     state,
     displayResult,
     displayExpression,
+    onCalculationComplete: (line) => {
+      addCalculatorHistoryEntry(line);
+    },
+  });
+
+  registerCalculatorHistoryTarget({
+    applyHistoryResult(value) {
+      state.currentInput = value;
+      state.expression = "";
+      state.shouldResetInput = true;
+      actions.updateDisplay();
+    },
   });
 
   buttons.forEach((button) => {

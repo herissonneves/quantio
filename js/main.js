@@ -13,6 +13,7 @@ import { initTabs } from './components/tabs.js';
 import { initCalculator } from './components/calculator.js';
 import { initThemeToggle } from './components/theme-toggle.js';
 import { initConverter } from './components/converter.js';
+import { initAppHistory } from './components/app-history.js';
 
 /**
  * Initializes the application by setting up all components.
@@ -31,6 +32,8 @@ function init() {
     initCalculator();
     // Initialize converter functionality
     initConverter();
+    // Shared history panel (depends on tab + calculator registration)
+    initAppHistory();
 }
 
 /**

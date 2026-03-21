@@ -15,6 +15,7 @@ import {
     validateAndLimitInputString,
     wouldExceedByteLimit,
 } from './converter/validation.js';
+import { addConverterHistoryEntry } from './app-history.js';
 
 // Re-exporta para compatibilidade e testes
 export { UNIT_DEFINITIONS, getByteSize, limitOutputSize };
@@ -29,6 +30,19 @@ let outputUnit;
 
 /** @type {string} */
 let currentCategory = 'length';
+
+/** @type {ReturnType<typeof setTimeout> | null} */
+let historyDebounceTimer = null;
+
+const CONVERTER_HISTORY_DEBOUNCE_MS = 700;
+
+const CATEGORY_LABELS = {
+    length: 'Length',
+    mass: 'Mass / Weight',
+    temperature: 'Temperature',
+    volume: 'Volume',
+    time: 'Time',
+};
 
 /**
  * Preenche os selects de unidade conforme a categoria atual.
@@ -81,12 +95,43 @@ function updateConversion() {
     const result = convertValueFn(value, fromIndex, toIndex, currentCategory);
     const roundedResult = roundConversionResult(result);
     outputValue.value = limitOutputSize(roundedResult);
+    scheduleConverterHistoryEntry();
+}
+
+/**
+ * Records a conversion line after input/units stabilize (debounced).
+ */
+function scheduleConverterHistoryEntry() {
+    clearTimeout(historyDebounceTimer);
+    historyDebounceTimer = setTimeout(() => {
+        historyDebounceTimer = null;
+        const validatedInput = validateAndLimitInputString(inputValue.value);
+        if (!validatedInput || validatedInput === '') return;
+
+        const out = outputValue.value;
+        if (!out || out === '') return;
+
+        const units = UNIT_DEFINITIONS[currentCategory];
+        if (!units) return;
+
+        const fromIndex = parseInt(inputUnit.value, 10);
+        const toIndex = parseInt(outputUnit.value, 10);
+        const fromUnit = units[fromIndex];
+        const toUnit = units[toIndex];
+        if (!fromUnit || !toUnit) return;
+
+        const catLabel = CATEGORY_LABELS[currentCategory] || currentCategory;
+        const line = `[${catLabel}] ${validatedInput} ${fromUnit.abbr} → ${out} ${toUnit.abbr}`;
+        addConverterHistoryEntry(line);
+    }, CONVERTER_HISTORY_DEBOUNCE_MS);
 }
 
 /**
  * Handler de mudança de categoria: atualiza unidades e limpa campos.
  */
 function handleCategoryChange() {
+    clearTimeout(historyDebounceTimer);
+    historyDebounceTimer = null;
     currentCategory = categorySelect.value;
     populateUnitSelectors();
     inputValue.value = '';
@@ -154,7 +199,6 @@ export function initConverter() {
     inputUnit = document.getElementById('input-unit');
     outputValue = document.getElementById('output-value');
     outputUnit = document.getElementById('output-unit');
-
     if (!categorySelect || !inputValue || !inputUnit || !outputValue || !outputUnit) {
         return;
     }

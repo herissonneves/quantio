@@ -13,11 +13,13 @@ import { canFitInDisplay, updateDisplay } from "./display.js";
  * @param {{currentInput: string, expression: string, shouldResetInput: boolean}} params.state
  * @param {HTMLElement|null} params.displayResult
  * @param {HTMLElement|null} params.displayExpression
+ * @param {(line: string) => void} [params.onCalculationComplete] Called when user presses "=" with a valid expression
  */
 export function createCalculatorActions({
   state,
   displayResult,
   displayExpression,
+  onCalculationComplete,
 }) {
   function commitDisplay() {
     updateDisplay({
@@ -48,7 +50,11 @@ export function createCalculatorActions({
     commitDisplay();
   }
 
-  function calculate() {
+  /**
+   * @param {{ recordToHistory?: boolean }} [options]
+   */
+  function calculate(options = {}) {
+    const { recordToHistory = false } = options;
     if (!state.expression) return;
 
     const parts = state.expression.split(" ");
@@ -57,6 +63,22 @@ export function createCalculatorActions({
     const secondNum = parseFloat(state.currentInput);
 
     const result = evaluateOperation(firstNum, operator, secondNum);
+
+    if (recordToHistory && onCalculationComplete) {
+      if (typeof result === "number" && Number.isNaN(result)) {
+        // Invalid operation; do not record.
+      } else {
+        const rhs =
+          typeof result === "number"
+            ? (() => {
+                const rounded = Math.round(result * 1000000000) / 1000000000;
+                return rounded.toString();
+              })()
+            : String(result);
+        const line = `${parts[0]} ${operator} ${state.currentInput} = ${rhs}`;
+        onCalculationComplete(line);
+      }
+    }
 
     if (typeof result === "number") {
       const roundedResult = Math.round(result * 1000000000) / 1000000000;
@@ -144,7 +166,7 @@ export function createCalculatorActions({
         inputOperator(value);
         break;
       case "=":
-        calculate();
+        calculate({ recordToHistory: true });
         break;
       default:
         inputNumber(value);

@@ -76,6 +76,10 @@ export function initTabs(container = document) {
                     panel.classList.add(CLASSES.panelActive);
                 }
             });
+
+            document.dispatchEvent(
+                new CustomEvent('quantio:tabchange', { detail: { tab: targetId } }),
+            );
         });
     });
 }

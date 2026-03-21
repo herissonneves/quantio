@@ -6,6 +6,8 @@ A modern calculator and unit converter web application built with vanilla JavaSc
 
 ## Features
 
+- **History**: One shared panel sits beside the tabs card (outside `section.tabs`) and stays visible when switching Calculator / Converter. The list shows the active tool’s history. Calculator logs completed `=` calculations; converter logs conversions (debounced) while you type. Both persist in `localStorage`. Tap a calculator history row to load its result.
+
 ### Calculator
 
 - Basic arithmetic operations: addition, subtraction, multiplication, division
@@ -51,6 +53,7 @@ quantio/
 │   ├── base.css          # Base styles and typography
 │   ├── calculator.css    # Calculator component styles
 │   ├── converter.css     # Converter component styles
+│   ├── history.css       # History panel (calculator + converter)
 │   ├── tabs.css          # Tabs component styles
 │   └── themes/           # Theme variants
 │       ├── theme-light.css
@@ -61,7 +64,9 @@ quantio/
 │       └── theme-dark-hc.css
 ├── js/
 │   ├── main.js           # Application entry point
+│   ├── utils/            # Shared helpers (e.g. history store/UI)
 │   └── components/
+│       ├── app-history.js # Shared history panel (tab-aware)
 │       ├── calculator.js # Calculator logic
 │       ├── converter.js  # Unit converter logic
 │       ├── tabs.js       # Tabs navigation

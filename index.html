@@ -47,6 +47,10 @@
     <!-- Converter component styles -->
     <link rel="stylesheet"
           href="css/converter.css">
+
+    <!-- Shared history panel (calculator + converter) -->
+    <link rel="stylesheet"
+          href="css/history.css">
   </head>
 
   <body>
@@ -108,127 +112,150 @@
       </header>
 
       <!--
-        Tabs section
-        Contains navigation tabs and tab panels for Calculator and Converter
+        Workspace: tabs (calculator / converter) + history (always visible, outside .tabs)
       -->
-      <section class="tabs">
-        <!-- Tabs navigation header -->
-        <div class="tabs__header">
-          <button class="tabs__item tabs__item--active"
-                  data-tab="calculator">
-            <span class="tabs__label">Calculator</span>
-          </button>
-          <button class="tabs__item"
-                  data-tab="converter">
-            <span class="tabs__label">Converter</span>
-          </button>
-        </div>
-
-        <!-- Tabs content panels -->
-        <div class="tabs__content">
-          <!--
-            Calculator Tab Panel
-            Contains the calculator component with display and buttons
-          -->
-          <div class="tabs__panel tabs__panel--active"
-               id="calculator">
-            <div class="calculator">
-              <!-- Calculator display: shows expression and result -->
-              <div class="calculator__display">
-                <span class="calculator__expression"></span>
-                <span class="calculator__result">0</span>
-              </div>
-              <!-- Calculator buttons: Row 1 - Functions -->
-              <button class="calculator__button" type="button">C</button>  <!-- Clear -->
-              <button class="calculator__button" type="button">±</button>  <!-- Toggle sign -->
-              <button class="calculator__button" type="button">%</button>  <!-- Percentage -->
-              <button class="calculator__button" type="button">÷</button> <!-- Division -->
-
-              <!-- Calculator buttons: Row 2 - Numbers 7-9 and Multiplication -->
-              <button class="calculator__button" type="button">7</button>
-              <button class="calculator__button" type="button">8</button>
-              <button class="calculator__button" type="button">9</button>
-              <button class="calculator__button" type="button">×</button> <!-- Multiplication -->
-
-              <!-- Calculator buttons: Row 3 - Numbers 4-6 and Subtraction -->
-              <button class="calculator__button" type="button">4</button>
-              <button class="calculator__button" type="button">5</button>
-              <button class="calculator__button" type="button">6</button>
-              <button class="calculator__button" type="button">-</button> <!-- Subtraction -->
-
-              <!-- Calculator buttons: Row 4 - Numbers 1-3 and Addition -->
-              <button class="calculator__button" type="button">1</button>
-              <button class="calculator__button" type="button">2</button>
-              <button class="calculator__button" type="button">3</button>
-              <button class="calculator__button" type="button">+</button> <!-- Addition -->
-
-              <!-- Calculator buttons: Row 5 - Zero (wide), Decimal, Equals -->
-              <button class="calculator__button calculator__button--wide" type="button">0</button> <!-- Wide button spans 2 columns -->
-              <button class="calculator__button" type="button">.</button> <!-- Decimal point -->
-              <button class="calculator__button" type="button">=</button> <!-- Equals/Calculate -->
-            </div>
+      <div class="app-workspace">
+        <!--
+          Tabs section — header + panels only
+        -->
+        <section class="tabs">
+          <!-- Tabs navigation header -->
+          <div class="tabs__header">
+            <button class="tabs__item tabs__item--active"
+                    data-tab="calculator">
+              <span class="tabs__label">Calculator</span>
+            </button>
+            <button class="tabs__item"
+                    data-tab="converter">
+              <span class="tabs__label">Converter</span>
+            </button>
           </div>
 
-          <!--
-            Converter Tab Panel
-            Contains unit conversion interface
-          -->
-          <div class="tabs__panel"
-               id="converter">
-            <div class="converter">
-              <!-- Category selector -->
-              <label class="converter__label"
-                     for="category-select">Conversion category:</label>
-              <select class="converter__select"
-                      id="category-select"
-                      name="category">
-                <option value="length">Length</option>
-                <option value="mass">Mass / Weight</option>
-                <option value="temperature">Temperature</option>
-                <option value="volume">Volume</option>
-                <option value="time">Time</option>
-              </select>
+          <div class="tabs__content">
+            <!--
+              Calculator Tab Panel
+            -->
+            <div class="tabs__panel tabs__panel--active"
+                 id="calculator">
+              <section class="tool-panel"
+                       aria-label="Calculator">
+                <div class="calculator">
+                  <!-- Calculator display: shows expression and result -->
+                  <div class="calculator__display">
+                    <span class="calculator__expression"></span>
+                    <span class="calculator__result">0</span>
+                  </div>
+                  <!-- Calculator buttons: Row 1 - Functions -->
+                  <button class="calculator__button" type="button">C</button>  <!-- Clear -->
+                  <button class="calculator__button" type="button">±</button>  <!-- Toggle sign -->
+                  <button class="calculator__button" type="button">%</button>  <!-- Percentage -->
+                  <button class="calculator__button" type="button">÷</button> <!-- Division -->
 
-              <!-- Input field with unit selector -->
-              <div class="converter__field">
-                <label class="converter__field-label" for="input-value">From:</label>
-                <div class="converter__input-group">
-                  <input type="number"
-                         class="converter__input"
-                         id="input-value"
-                         placeholder="0"
-                         step="any"
-                         inputmode="decimal">
-                  <select class="converter__unit-select"
-                          id="input-unit"
-                          aria-label="Input unit">
-                    <!-- Options populated by JavaScript -->
-                  </select>
-                </div>
-              </div>
+                  <!-- Calculator buttons: Row 2 - Numbers 7-9 and Multiplication -->
+                  <button class="calculator__button" type="button">7</button>
+                  <button class="calculator__button" type="button">8</button>
+                  <button class="calculator__button" type="button">9</button>
+                  <button class="calculator__button" type="button">×</button> <!-- Multiplication -->
 
-              <!-- Output field with unit selector -->
-              <div class="converter__field">
-                <label class="converter__field-label" for="output-value">To:</label>
-                <div class="converter__input-group">
-                  <input type="number"
-                         class="converter__input"
-                         id="output-value"
-                         placeholder="0"
-                         step="any"
-                         inputmode="decimal"
-                         readonly>
-                  <select class="converter__unit-select"
-                          id="output-unit"
-                          aria-label="Output unit">
-                    <!-- Options populated by JavaScript -->
-                  </select>
+                  <!-- Calculator buttons: Row 3 - Numbers 4-6 and Subtraction -->
+                  <button class="calculator__button" type="button">4</button>
+                  <button class="calculator__button" type="button">5</button>
+                  <button class="calculator__button" type="button">6</button>
+                  <button class="calculator__button" type="button">-</button> <!-- Subtraction -->
+
+                  <!-- Calculator buttons: Row 4 - Numbers 1-3 and Addition -->
+                  <button class="calculator__button" type="button">1</button>
+                  <button class="calculator__button" type="button">2</button>
+                  <button class="calculator__button" type="button">3</button>
+                  <button class="calculator__button" type="button">+</button> <!-- Addition -->
+
+                  <!-- Calculator buttons: Row 5 - Zero (wide), Decimal, Equals -->
+                  <button class="calculator__button calculator__button--wide" type="button">0</button> <!-- Wide button spans 2 columns -->
+                  <button class="calculator__button" type="button">.</button> <!-- Decimal point -->
+                  <button class="calculator__button" type="button">=</button> <!-- Equals/Calculate -->
                 </div>
-              </div>
+              </section>
+            </div>
+
+            <!--
+              Converter Tab Panel
+            -->
+            <div class="tabs__panel"
+                 id="converter">
+              <section class="tool-panel"
+                       aria-label="Unit converter">
+                <div class="converter">
+                  <!-- Category selector -->
+                  <label class="converter__label"
+                         for="category-select">Conversion category:</label>
+                  <select class="converter__select"
+                          id="category-select"
+                          name="category">
+                    <option value="length">Length</option>
+                    <option value="mass">Mass / Weight</option>
+                    <option value="temperature">Temperature</option>
+                    <option value="volume">Volume</option>
+                    <option value="time">Time</option>
+                  </select>
+
+                  <!-- Input field with unit selector -->
+                  <div class="converter__field">
+                    <label class="converter__field-label" for="input-value">From:</label>
+                    <div class="converter__input-group">
+                      <input type="number"
+                             class="converter__input"
+                             id="input-value"
+                             placeholder="0"
+                             step="any"
+                             inputmode="decimal">
+                      <select class="converter__unit-select"
+                              id="input-unit"
+                              aria-label="Input unit">
+                        <!-- Options populated by JavaScript -->
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Output field with unit selector -->
+                  <div class="converter__field">
+                    <label class="converter__field-label" for="output-value">To:</label>
+                    <div class="converter__input-group">
+                      <input type="number"
+                             class="converter__input"
+                             id="output-value"
+                             placeholder="0"
+                             step="any"
+                             inputmode="decimal"
+                             readonly>
+                      <select class="converter__unit-select"
+                              id="output-unit"
+                              aria-label="Output unit">
+                        <!-- Options populated by JavaScript -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <!-- History: outside .tabs; visible regardless of active tab -->
+        <aside class="history-panel component-history"
+               id="app-history"
+               aria-labelledby="app-history-heading">
+          <div class="component-history__header">
+            <h2 class="component-history__title"
+                id="app-history-heading">History</h2>
+            <button type="button"
+                    class="component-history__clear"
+                    id="app-history-clear">Clear</button>
+          </div>
+          <ul class="component-history__list"
+              id="app-history-list"
+              role="list"></ul>
+        </aside>
+      </div>
     </main>
 
     <!--
