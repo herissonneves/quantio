@@ -166,7 +166,7 @@ main {
     flex-direction: column;
     gap: 16px;
     padding: 24px;
-    max-width: 500px;
+    max-width: 56rem;
     margin: 0 auto;
 }
 
